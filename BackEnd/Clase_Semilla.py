@@ -1,6 +1,5 @@
 from typing import SupportsFloat
 
-
 class Estudiante:
 
     def __init__ (self, id, cedula, nombre_apellido, registro):
@@ -18,6 +17,8 @@ class Estudiante:
 
         print(f"El estudiante {asistencia} asistio")
 
+    def registrar_asistencia(self):
+        self.asistencia.append()
 
     def nueva_asistencia(self):
         self.asistencia.append()

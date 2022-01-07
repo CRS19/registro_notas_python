@@ -1,41 +1,49 @@
 import tkinter as tk
-data = [
-            # Nr. Name  Active
-            [1,   "Alvarez", False],
-            [2,   "Arias", False],
-            [3,   "Aviles", False],
-            [4,   "Caceres", False],
-            [5,   "Caiza", False],
-            [6,   "Camacho", False],
-            [7,   "Chimbolema", False],
-            [8,   "Coello", False],
-            [9,   "Duran", False],
-            [10,   "Garces", False],
-            [11,   "Gavilema", False],
-            [12,   "Gonzalez", False],
-            [13,   "Gualotuña", False],
-            [14,   "Guarnizo", False],
-            [15,   "Inca Saigua Diego Fernando", False],
-            [16,   "Iza", False],
-            [17,   "Jimenez", False],
-            [18,   "Luna", False],
-            [19,   "Moncayo", False],
-            [20,   "Montenegro", False],
-            [21,   "Naranjo", False],
-            [22,   "Osejo", False],
-            [23,   "Puma", False],
-            [24,   "Quero", False],
-            [25,   "Quintana", False],
-            [26,   "Rodriguez", False],
-            [27,   "Ruiz", False],
-            [28,   "Samueza", False],
-            [29,   "Singo", False],
-            [30,   "Suntaxi", False],
-            [31,   "Tupiza", False],
-            [32,   "Zambrano", False],
-            [33,   "Zurita", False],
-            [34,   "Ñacata", False],
-            ]
+from CRUD import Crud
+Crud
+arreglo_estudiantes = Crud.obtener_estudiantes()
+data = []
+for index,estudiante in enumerate(arreglo_estudiantes):
+    data.append([index+1,estudiante.nombre_apellido, estudiante.registro])
+
+
+#data = [
+#            # Nr. Name  Active
+#            [1,   "Alvarez", False],
+#            [2,   "Arias", False],
+#            [3,   "Aviles", False],
+#            [4,   "Caceres", False],
+#            [5,   "Caiza", False],
+#            [6,   "Camacho", False],
+#            [7,   "Chimbolema", False],
+#            [8,   "Coello", False],
+#            [9,   "Duran", False],
+#            [10,   "Garces", False],
+#            [11,   "Gavilema", False],
+#            [12,   "Gonzalez", False],
+#            [13,   "Gualotuña", False],
+#            [14,   "Guarnizo", False],
+#            [15,   "Inca Saigua Diego Fernando", False],
+#            [16,   "Iza", False],
+#            [17,   "Jimenez", False],
+#            [18,   "Luna", False],
+#            [19,   "Moncayo", False],
+#            [20,   "Montenegro", False],
+#            [21,   "Naranjo", False],
+#            [22,   "Osejo", False],
+#            [23,   "Puma", False],
+#            [24,   "Quero", False],
+#            [25,   "Quintana", False],
+#            [26,   "Rodriguez", False],
+#            [27,   "Ruiz", False],
+#            [28,   "Samueza", False],
+#            [29,   "Singo", False],
+#            [30,   "Suntaxi", False],
+#            [31,   "Tupiza", False],
+#            [32,   "Zambrano", False],
+#            [33,   "Zurita", False],
+#            [34,   "Ñacata", False],
+#            ]
 def ObtenerAsistencia():
     for i in range(len(data)):
         if ArregloDeCheckButtons[i].get()==1:

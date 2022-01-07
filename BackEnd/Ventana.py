@@ -88,8 +88,8 @@ canvas.create_window((0, 0), window=frame_buttons, anchor='nw')
 
 
 tk.Label(frame_buttons, text="Nr.", anchor="w", bg="green").grid(row=0, column=0, sticky="ew")
-tk.Label(frame_buttons, text="Name", anchor="w",bg="green").grid(row=0, column=1, sticky="ew")
-tk.Label(frame_buttons, text="Active", anchor="w",bg="green").grid(row=0, column=2, sticky="ew")
+tk.Label(frame_buttons, text="Apellidos y Nombres", anchor="w",bg="green").grid(row=0, column=1, sticky="ew")
+tk.Label(frame_buttons, text="Asistencia", anchor="w",bg="green").grid(row=0, column=2, sticky="ew")
 tk.Label(frame_buttons, text="Action", anchor="w",bg="green").grid(row=0, column=3, sticky="ew")
 
 def delete(nr):
@@ -127,7 +127,7 @@ for (nr, name, active) in data:
 frame_buttons.update_idletasks()
 
 # Resize the canvas frame to show exactly 5-by-5 buttons and the scrollbar
-first5columns_width = 300
+first5columns_width = 380
 first5rows_height = 350
 frame_canvas.config(width=first5columns_width + vsb.winfo_width(),
                     height=first5rows_height)

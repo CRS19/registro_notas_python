@@ -7,9 +7,10 @@ ID=1
 CEDULA=3
 PAGADO=16
 APOYO=19
+#POR FAVOR CAMBIAR ESTA DIRECCION POR LA DIRECCION EN LA QUE USTEDES TIENEN EL ARCHIVO ECXEL, SINO NO FUNCIONA
+DIRECCION_EXCEL="C:\\Users\\Usuario\\Desktop\\p2p\\proyecto\\registro_notas_python\\BackEnd"
 
-
-data=pd.read_excel("C:\\Users\\Gato\\OneDrive\\Documentos\\Anthony U\\Python\\ProyectoFinal\\registro_notas_python\\BackEnd\\Prueba.xlsx",skiprows=12)
+data=pd.read_excel(f"{DIRECCION_EXCEL}\\Prueba.xlsx",skiprows=12)
 #print(data)
 
 #print(data.iat[0,7])

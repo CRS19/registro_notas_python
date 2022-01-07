@@ -4,38 +4,43 @@ data = [
             [1,   "Alvarez", False],
             [2,   "Arias", False],
             [3,   "Aviles", False],
-            [4,   "Caceres", True],
+            [4,   "Caceres", False],
             [5,   "Caiza", False],
-            [6,   "Camacho", True],
-            [7,   "Chimbolema", True],
+            [6,   "Camacho", False],
+            [7,   "Chimbolema", False],
             [8,   "Coello", False],
-            [9,   "Duran", True],
-            [10,   "Garces", True],
+            [9,   "Duran", False],
+            [10,   "Garces", False],
             [11,   "Gavilema", False],
-            [12,   "Gonzalez", True],
-            [13,   "Gualotuña", True],
+            [12,   "Gonzalez", False],
+            [13,   "Gualotuña", False],
             [14,   "Guarnizo", False],
-            [15,   "Inca Saigua Diego Fernando", True],
-            [16,   "Iza", True],
+            [15,   "Inca Saigua Diego Fernando", False],
+            [16,   "Iza", False],
             [17,   "Jimenez", False],
-            [18,   "Luna", True],
-            [19,   "Moncayo", True],
+            [18,   "Luna", False],
+            [19,   "Moncayo", False],
             [20,   "Montenegro", False],
-            [21,   "Naranjo", True],
-            [22,   "Osejo", True],
+            [21,   "Naranjo", False],
+            [22,   "Osejo", False],
             [23,   "Puma", False],
-            [24,   "Quero", True],
-            [25,   "Quintana", True],
+            [24,   "Quero", False],
+            [25,   "Quintana", False],
             [26,   "Rodriguez", False],
-            [27,   "Ruiz", True],
-            [28,   "Samueza", True],
+            [27,   "Ruiz", False],
+            [28,   "Samueza", False],
             [29,   "Singo", False],
-            [30,   "Suntaxi", True],
-            [31,   "Tupiza", True],
+            [30,   "Suntaxi", False],
+            [31,   "Tupiza", False],
             [32,   "Zambrano", False],
-            [33,   "Zurita", True],
-            [34,   "Ñacata", True],
+            [33,   "Zurita", False],
+            [34,   "Ñacata", False],
             ]
+def ObtenerAsistencia():
+    for i in range(len(data)):
+        if ArregloDeCheckButtons[i].get()==1:
+            print(data[i][1])
+    
 
 root = tk.Tk()
 root.grid_rowconfigure(0, weight=1)
@@ -47,7 +52,7 @@ frame_main.grid(sticky='news')
 label1 = tk.Button(frame_main, text="Regresar", fg="green")
 label1.grid(row=3, column=0, pady=5, sticky='nw')
 
-label2 = tk.Button(frame_main, text="Guardar", fg="red")
+label2 = tk.Button(frame_main, text="Guardar", fg="red",command=ObtenerAsistencia)
 label2.grid(row=4, column=0, pady=5, sticky='nw')
 
 # Create a frame for the canvas with non-zero row&column weights
@@ -83,11 +88,15 @@ def delete(nr):
     print ("deleting...nr=", nr)
 
 row = 1
+ArregloDeCheckButtons=[]
+
 for (nr, name, active) in data:
     nr_label = tk.Label(frame_buttons, text=str(nr), anchor="w", bg="white")
     name_label = tk.Label(frame_buttons, text=name, anchor="w", bg="white")
     action_button = tk.Button(frame_buttons, text="Delete", command=lambda nr=nr: delete(nr))
-    active_cb = tk.Checkbutton(frame_buttons, onvalue=True, offvalue=False,bg="gray")
+    Val_CheckButton = tk.IntVar()
+    active_cb = tk.Checkbutton(frame_buttons, onvalue=True, offvalue=False,variable=Val_CheckButton,bg="gray")
+    ArregloDeCheckButtons.append(Val_CheckButton)
     if active:
         active_cb.select()
     else:
@@ -100,6 +109,7 @@ for (nr, name, active) in data:
 
     row += 1
 
+#print(ArregloDeCheckButtons[0].get())
 
 
 

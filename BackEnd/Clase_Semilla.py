@@ -17,8 +17,8 @@ class Estudiante:
 
         print(f"El estudiante {asistencia} asistio")
 
-    def registrar_asistencia(self):
-        self.asistencia.append()
+    def registrar_asistencia(self,posicion,crud):
+        crud.RegistrarAsistencia(posicion)
 
     def nueva_asistencia(self):
         self.asistencia.append()

@@ -1,55 +1,63 @@
+from datetime import datetime
 import tkinter as tk
 from CRUD import Crud
 crud=Crud()
+#arreglo de objetos de la clase estudiantes 
 arreglo_estudiantes = Crud.obtener_estudiantes()
 data = []
 for index,estudiante in enumerate(arreglo_estudiantes):
     data.append([index+1,estudiante.nombre_apellido, estudiante.registro])
-
-
-
+#index es el contador
 def ObtenerAsistencia():
     for i in range(len(data)):
         if ArregloDeCheckButtons[i].get()==1:
-            print(data[i][1])
+            #estoy llamando al metodo de la clase estudiante
+            # al estudiante que esta en la posicion que valga ahi, registrara su asistencia (crud ayuda a guardar la asistencia) 
             arreglo_estudiantes[i].registrar_asistencia(i,crud)
     
+FechaHoy=datetime.now()
+fecha=datetime.strftime(FechaHoy,"%d/ %m /%Y")  
 
 root = tk.Tk()
 root.grid_rowconfigure(0, weight=1)
 root.columnconfigure(0, weight=1)
 
+
 frame_main = tk.Frame(root, bg="white")
 frame_main.grid(sticky='news')
+
+label0 = tk.Label(frame_main, text=f"Fecha: {fecha}", fg="black")
+label0.grid(row=0, column=0, pady=(5, 0), sticky='nw')
 
 label1 = tk.Button(frame_main, text="Regresar", fg="green")
 label1.grid(row=3, column=0, pady=5, sticky='nw')
 
 label2 = tk.Button(frame_main, text="Guardar", fg="red",command=ObtenerAsistencia)
-label2.grid(row=4, column=0, pady=5, sticky='nw')
+label2.grid(row=4, column=0, pady=5, sticky='ne')
 
-# Create a frame for the canvas with non-zero row&column weights
+#Creamos un nuevo lienzo a partir del frame main 
 frame_canvas = tk.Frame(frame_main)
 frame_canvas.grid(row=2, column=0, pady=(5, 0), sticky='nw')
 frame_canvas.grid_rowconfigure(0, weight=1)
 frame_canvas.grid_columnconfigure(0, weight=1)
-# Set grid_propagate to False to allow 5-by-5 buttons resizing later
+#Permite modificar el tamaño del lienzo creado
 frame_canvas.grid_propagate(False)
 
-# Add a canvas in that frame
+#Creamos otro lienzo dentro de frame canvas
 canvas = tk.Canvas(frame_canvas, bg="white")
 canvas.grid(row=0, column=0, sticky="news")
+#Sticky= Si el elemento es menor que la grilla se ubicara dentro de las posiciones nsew
+#creamos nuestra scrollbar 
+barra = tk.Scrollbar(frame_canvas, orient="vertical", command=canvas.yview)
+barra.grid(row=0, column=1, sticky='ns')
+#maneja la vista del canvas
+canvas.configure(yscrollcommand=barra.set)
 
-# Link a scrollbar to the canvas
-vsb = tk.Scrollbar(frame_canvas, orient="vertical", command=canvas.yview)
-vsb.grid(row=0, column=1, sticky='ns')
-canvas.configure(yscrollcommand=vsb.set)
-
-# Create a frame to contain the buttons
+#Creamos otro lienzo para nuestra tabla 
 frame_buttons = tk.Frame(canvas, bg="white")
 canvas.create_window((0, 0), window=frame_buttons, anchor='nw')
 
-# Add 9-by-5 buttons to the frame
+#Creamos las etiquetas de los titulos de nuestra tabla 
 
 
 tk.Label(frame_buttons, text="Nr.", anchor="w", bg="green").grid(row=0, column=0, sticky="ew")
@@ -60,45 +68,41 @@ tk.Label(frame_buttons, text="Action", anchor="w",bg="green").grid(row=0, column
 def delete(nr):
     print ("deleting...nr=", nr)
 
-row = 1
 ArregloDeCheckButtons=[]
 
-for (nr, name, active) in data:
-    nr_label = tk.Label(frame_buttons, text=str(nr), anchor="w", bg="white")
-    name_label = tk.Label(frame_buttons, text=name, anchor="w", bg="white")
-    action_button = tk.Button(frame_buttons, text="Delete", command=lambda nr=nr: delete(nr))
+#esta sacando por partes
+for (posicion, nombre, registro) in data:
+    posicion_label = tk.Label(frame_buttons, text=str(posicion), anchor="w", bg="white") 
+    nombre_label = tk.Label(frame_buttons, text=nombre, anchor="w", bg="white")
+    registro_button = tk.Button(frame_buttons, text="Delete", command=lambda nr=posicion: delete(nr))
     Val_CheckButton = tk.IntVar()
     active_cb = tk.Checkbutton(frame_buttons, onvalue=True, offvalue=False,variable=Val_CheckButton,bg="gray")
     ArregloDeCheckButtons.append(Val_CheckButton)
-    if active:
+    if registro:
         active_cb.select()
     else:
         active_cb.deselect()
 
-    nr_label.grid(row=row, column=0, sticky="ew")
-    name_label.grid(row=row, column=1, sticky="ew")
-    active_cb.grid(row=row, column=2, sticky="ew")
-    action_button.grid(row=row, column=3, sticky="ew")
-
-    row += 1
-
-#print(ArregloDeCheckButtons[0].get())
+    posicion_label.grid(row=posicion, column=0, sticky="ew")
+    nombre_label.grid(row=posicion, column=1, sticky="ew")
+    active_cb.grid(row=posicion, column=2, sticky="ew")
+    registro_button.grid(row=posicion, column=3, sticky="ew")
 
 
 
 
-
-# Update buttons frames idle tasks to let tkinter calculate buttons sizes
+#Actualizar los tamaños del frame buttons
 frame_buttons.update_idletasks()
 
-# Resize the canvas frame to show exactly 5-by-5 buttons and the scrollbar
+#Configuramos el tamaño
 first5columns_width = 380
 first5rows_height = 350
-frame_canvas.config(width=first5columns_width + vsb.winfo_width(),
+frame_canvas.config(width=first5columns_width + barra.winfo_width(),
                     height=first5rows_height)
 
-# Set the canvas scrolling region
+#Ubicamos el scrollbar en el lienzo que queramos
 canvas.config(scrollregion=canvas.bbox("all"))
 
-# Launch the GUI
+
+#Ejecuta el programa
 root.mainloop()

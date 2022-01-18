@@ -1,4 +1,3 @@
-from typing import SupportsFloat
 
 class Estudiante:
 
@@ -7,20 +6,10 @@ class Estudiante:
         self.cedula = cedula
         self.nombre_apellido = nombre_apellido
         self.registro = registro
-    
-    def asistir(self,asistencia):
-        
-        #asistencia.upper()
-        #if asistencia == "SI":
-            
-        #else:
 
-        print(f"El estudiante {asistencia} asistio")
-
+#Este metodo va a registrar la asistencia en esa posicion por medio del crud (objeto)
+#posicion es un numero , el self es la que hacer referencia a la clase en si misma 
     def registrar_asistencia(self,posicion,crud):
         crud.RegistrarAsistencia(posicion)
-
-    def nueva_asistencia(self):
-        self.asistencia.append()
-    
-             
+    #ayuda a registrar la asistencia
+         

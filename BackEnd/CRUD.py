@@ -1,6 +1,5 @@
-from numpy import NaN, nan
 import pandas as pd
-from Clase_Semilla import Estudiante
+from Clase_Estudiante import Estudiante
 
 NOMBRE_APELLIDO=6
 ID=0
@@ -16,7 +15,8 @@ COLUMNA=2
 NRO_DE_ESTUDIANTES=34
 
 data_Padre=pd.read_excel(f"{DIRECCION_EXCEL}\\Prueba.xlsx")
-#print(data_Padre)
+#[12:46,1:24]
+#iloc saca un bloque entero del frame 
 data_Hijo=data_Padre.iloc[FILA-2:NRO_DE_ESTUDIANTES+FILA-2,COLUMNA-1:24]
 #print(data)
 
@@ -40,8 +40,11 @@ class Crud:
         return estudiantes
 
     def RegistrarAsistencia(self,PosicionEstudianteLista):
+        #el iat es una celda y el iloc un grupo de celdas
         data_Hijo.iat[PosicionEstudianteLista,REGISTRO_ASISTENCIA]="X"
-        print(data_Hijo)
+        #modificamos al hijo y aqui le ponemos de vuelta al padre, sin perder el encabezado del excel (otra informacion)
         data_Padre.iloc[FILA-2:NRO_DE_ESTUDIANTES+FILA-2,COLUMNA-1:24]=data_Hijo
+        #estamos regresando la informacion que modificamos en el hijo al padre 
         data_Padre.to_excel(f"{DIRECCION_EXCEL}\\Prueba.xlsx",index=False)
+
 

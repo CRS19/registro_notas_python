@@ -1,8 +1,8 @@
 import tkinter as tk
 from turtle import width
-from CRUD import Crud
-crud=Crud()
-arreglo_estudiantes = Crud.obtener_estudiantes()
+from Archivo_que_maneja_el_Excel import Crear
+objeto=Crear()
+arreglo_estudiantes = Crear.obtener_estudiantes()
 data = []
 for index,estudiante in enumerate(arreglo_estudiantes):
     data.append([index+1,estudiante.nombre_apellido, estudiante.registro])
@@ -13,7 +13,7 @@ def ObtenerAsistencia():
     for i in range(len(data)):
         if ArregloDeCheckButtons[i].get()==1:
             print(data[i][1])
-            arreglo_estudiantes[i].registrar_asistencia(i,crud)
+            arreglo_estudiantes[i].registrar_asistencia(i,objeto)
 
 def regresar():
     root.withdraw()

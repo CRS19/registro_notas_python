@@ -1,9 +1,10 @@
 from datetime import datetime
 import tkinter as tk
-from CRUD import Crud
-crud=Crud()
+from Archivo_que_maneja_el_Excel import Crear
+objeto=Crear()
 #arreglo de objetos de la clase estudiantes 
-arreglo_estudiantes = Crud.obtener_estudiantes()
+arreglo_estudiantes = Crear.obtener_estudiantes()
+#Crear.ComunicacionConlaBaseDeDatos
 data = []
 for index,estudiante in enumerate(arreglo_estudiantes):
     data.append([index+1,estudiante.nombre_apellido, estudiante.registro])
@@ -13,7 +14,7 @@ def ObtenerAsistencia():
         if ArregloDeCheckButtons[i].get()==1:
             #estoy llamando al metodo de la clase estudiante
             # al estudiante que esta en la posicion que valga ahi, registrara su asistencia (crud ayuda a guardar la asistencia) 
-            arreglo_estudiantes[i].registrar_asistencia(i,crud)
+            arreglo_estudiantes[i].registrar_asistencia(i,objeto)
     
 FechaHoy=datetime.now()
 fecha=datetime.strftime(FechaHoy,"%d/ %m /%Y")  
